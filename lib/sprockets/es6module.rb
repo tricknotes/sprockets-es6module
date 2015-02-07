@@ -24,7 +24,7 @@ module Sprockets
 
       raise "Unsupported method `#{type}`. Available types are: #{MODULE_METHODS.keys.inspect}" unless @method
 
-      @options = options.dup.freeze
+      @options = options.dup.merge(strict: false).freeze
 
       @cache_key = [
         self.class.name,
@@ -35,13 +35,14 @@ module Sprockets
     end
 
     def call(input)
+      data = Sprockets::ES6.new(blacklist: ['es6.modules', 'useStrict']).call(input)
+
       module_name = File.basename(input[:name], '.*')
-      data = input[:data]
-      options = @options.reverse_merge(amdName: module_name)
+      options = @options.merge(amdName: module_name)
       result = input[:cache].fetch(@cache_key + [options, data]) do
         Esperanto.send(@method, data, options)
       end
-      Sprockets::ES6.call(input.merge(data: result['code']))
+      result['code']
     end
   end
 
