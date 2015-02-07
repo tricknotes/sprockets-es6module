@@ -1,6 +1,6 @@
 # Sprockets::ES6Module
 
-TODO: Write a gem description
+Sprockets ES6 transformer with module syntax.
 
 ## Installation
 
@@ -20,7 +20,24 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+``` js
+// hi.es6module
+
+export default class HI {
+  hello(name = 'there') {
+    return 'Hi, ' + name + '.';
+  }
+}
+```
+
+``` js
+// main.es6
+
+import HI from 'hi';
+
+let hi = new HI();
+hi.hello(); //=> 'Hi, there.'
+```
 
 ## Contributing
 

@@ -8,8 +8,8 @@ Gem::Specification.new do |spec|
   spec.version       = Sprockets::ES6Module::VERSION
   spec.authors       = ['Ryunosuke SATO']
   spec.email         = ['tricknotes.rs@gmail.com']
-  spec.summary       = %q{TODO: Write a short summary. Required.}
-  spec.description   = %q{TODO: Write a longer description. Optional.}
+  spec.summary       = %q{Sprockets ES6 transformer with module syntax}
+  spec.description   = %q{Sprockets ES6 transformer with module syntax}
   spec.homepage      = 'https://github.com/tricknotes/sprockets-es6module'
   spec.license       = 'MIT'
 
