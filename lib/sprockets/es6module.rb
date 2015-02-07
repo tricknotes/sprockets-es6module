@@ -6,9 +6,9 @@ require 'sprockets/es6'
 module Sprockets
   class ES6Module
     MODULE_METHODS = {
-      amd: 'toAmd',
-      common: 'toCjs',
-      umd: 'toUmd'
+      amd: 'to_amd',
+      common: 'to_cjs',
+      umd: 'to_umd'
     }
 
     def self.instance
