@@ -1,6 +1,7 @@
 require 'sprockets/es6module/version'
 
 require 'esperanto'
+require 'sprockets/es6'
 
 module Sprockets
   class ES6Module
@@ -29,11 +30,11 @@ module Sprockets
       result = input[:cache].fetch(@cache_key + [options, data]) do
         Esperanto.transform(data, options)
       end
-      result['code']
+      Sprockets::ES6.call(input.merge(data: result['code']))
     end
   end
 
   register_mime_type 'text/ecmascript-6+module', extensions: ['.es6module'], charset: :unicode
-  register_transformer 'text/ecmascript-6+module', 'text/ecmascript-6', ES6Module
+  register_transformer 'text/ecmascript-6+module', 'application/javascript', ES6Module
   register_preprocessor 'text/ecmascript-6+module', DirectiveProcessor
 end
