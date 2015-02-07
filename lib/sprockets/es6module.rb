@@ -5,6 +5,12 @@ require 'sprockets/es6'
 
 module Sprockets
   class ES6Module
+    MODULE_METHODS = {
+      amd: 'toAmd',
+      common: 'toCjs',
+      umd: 'toUmd'
+    }
+
     def self.instance
       @instance ||= new
     end
@@ -13,13 +19,18 @@ module Sprockets
       instance.call(input)
     end
 
-    def initialize(options = {})
+    def initialize(type = :amd, options = {})
+      @method = MODULE_METHODS[type]
+
+      raise "Unsupported method `#{type}`. Available types are: #{MODULE_METHODS.keys.inspect}" unless @method
+
       @options = options.dup.freeze
 
       @cache_key = [
         self.class.name,
         Esperanto::VERSION,
-        VERSION
+        VERSION,
+        @method
       ].freeze
     end
 
@@ -28,7 +39,7 @@ module Sprockets
       data = input[:data]
       options = @options.reverse_merge(amdName: module_name)
       result = input[:cache].fetch(@cache_key + [options, data]) do
-        Esperanto.transform(data, options)
+        Esperanto.send(@method, data, options)
       end
       Sprockets::ES6.call(input.merge(data: result['code']))
     end
