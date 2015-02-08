@@ -37,7 +37,7 @@ module Sprockets
     def call(input)
       data = Sprockets::ES6.new(blacklist: ['es6.modules', 'useStrict']).call(input)
 
-      module_name = File.basename(input[:name], '.*')
+      module_name = input[:name]
       options = @options.merge(amdName: module_name)
       result = input[:cache].fetch(@cache_key + [options, data]) do
         Esperanto.send(@method, data, options)

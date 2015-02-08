@@ -65,4 +65,23 @@ define('export_with_template', function () {
 
     assert { expected == asset.to_s }
   end
+
+  def test_export_with_directory
+    asset = @env['some-directory/hi.js']
+
+    assert asset
+    assert { 'application/javascript' == asset.content_type }
+
+    expected = <<-JS
+define('some-directory/hi', function () {
+
+\t'use strict';
+
+\treturn "hi";
+
+});
+    JS
+
+    assert { expected == asset.to_s }
+  end
 end
