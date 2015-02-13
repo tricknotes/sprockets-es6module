@@ -2,6 +2,8 @@
 
 Sprockets ES6 transformer with module syntax.
 
+**This is an experimental gem. I want the effort of this gem to merge [sprockets-es6](https://github.com/josh/sprockets-es6)**
+
 ## Installation
 
 Add this line to your application's Gemfile:
