@@ -15,7 +15,7 @@ class TestSprocketsES6Module < MiniTest::Test
     assert asset
     assert { 'application/javascript' == asset.content_type }
 
-    expected = <<-JS
+    expected = <<-JS.strip
 define('export', function () {
 
 \t'use strict';
@@ -34,7 +34,7 @@ define('export', function () {
     assert asset
     assert { 'application/javascript' == asset.content_type }
 
-    expected = <<-JS
+    expected = <<-JS.strip
 define('import', ['hi'], function (Hi) {
 
 \t'use strict';
@@ -51,7 +51,7 @@ define('import', ['hi'], function (Hi) {
     assert asset
     assert { 'application/javascript' == asset.content_type }
 
-    expected = <<-JS
+    expected = <<-JS.strip
 define('export_with_template', function () {
 
   'use strict';
@@ -72,7 +72,7 @@ define('export_with_template', function () {
     assert asset
     assert { 'application/javascript' == asset.content_type }
 
-    expected = <<-JS
+    expected = <<-JS.strip
 define('some-directory/hi', function () {
 
 \t'use strict';

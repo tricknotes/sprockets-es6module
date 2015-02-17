@@ -46,7 +46,5 @@ module Sprockets
     end
   end
 
-  register_mime_type 'text/ecmascript-6+module', extensions: ['.es6module'], charset: :unicode
-  register_transformer 'text/ecmascript-6+module', 'application/javascript', ES6Module
-  register_preprocessor 'text/ecmascript-6+module', DirectiveProcessor
+  register_engine '.es6module', ES6Module, mime_type: 'application/javascript'
 end
